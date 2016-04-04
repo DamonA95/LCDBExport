@@ -221,7 +221,8 @@ class CMain extends CMyMySQLi {
                 $Count = $row[ 'a_count' ];
                 $CheckSum = $row[ 'a_checksum' ];
                 $Filename = $row[ 'a_filename' ];
-                $CExportLod->InitExportLod( $Do, $row[ 'a_name' ], $MyTable, $DbTable, $DbTable2, $this->GetType( $MyTable ), $this->GetTable( $MyTable ), $this->GetType( $MyTable2 ), $this->GetTable( $MyTable2 ), $Count, $CheckSum, $Filename );
+                $Category = $row['a_category'];
+                $CExportLod->InitExportLod( $Do, $row[ 'a_name' ], $MyTable, $DbTable, $DbTable2, $this->GetType( $MyTable ), $this->GetTable( $MyTable ), $this->GetType( $MyTable2 ), $this->GetTable( $MyTable2 ), $Count, $CheckSum, $Filename, $Category );
             }
             if ( $Do == $row[ 'a_name' ] ) {
                 $MyTable = $row[ 'a_mytable' ];
@@ -231,7 +232,8 @@ class CMain extends CMyMySQLi {
                 $Count = $row[ 'a_count' ];
                 $CheckSum = $row[ 'a_checksum' ];
                 $Filename = $row[ 'a_filename' ];
-                $CExportLod->InitExportLod( $Do, $row[ 'a_name' ], $MyTable, $DbTable, $DbTable2, $this->GetType( $MyTable ), $this->GetTable( $MyTable ), $this->GetType( $MyTable2 ), $this->GetTable( $MyTable2 ), $Count, $CheckSum, $Filename );
+                $Category = $row['a_category'];
+                $CExportLod->InitExportLod( $Do, $row[ 'a_name' ], $MyTable, $DbTable, $DbTable2, $this->GetType( $MyTable ), $this->GetTable( $MyTable ), $this->GetType( $MyTable2 ), $this->GetTable( $MyTable2 ), $Count, $CheckSum, $Filename, $Category );
             }
         }
         if ( $Do == "all" ) {

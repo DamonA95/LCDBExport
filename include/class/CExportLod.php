@@ -5,7 +5,7 @@ class CExportLod extends CWriteType {
     var $fp;
     var $CheckSumGlobal;
 
-    Public Function InitExportLod( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName ) {
+    Public Function InitExportLod( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName, $Category ) {
         $query = "SELECT * FROM t_lods WHERE a_name = '$Name'";
         $stmt = $this->mysqliExporter->prepare( $query );
         if ( $stmt = $this->mysqliExporter->prepare( $query ) ) {
@@ -18,11 +18,11 @@ class CExportLod extends CWriteType {
             $this->Msg( "[Error] $FileName isn't enabled!", "error" );
         } else {
             if ( $Do == "all" ) {
-                $this->SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName );
+                $this->SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName, $Category );
             } else {
                 $this->Msg( "$FileName", "normal" );
-                $this->SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName );
-                $this->DownloadFile( $FileName );
+                $this->SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName, $Category );
+                $this->DownloadFile( $FileName, $Category );
             }
         }
     }
@@ -48,26 +48,26 @@ class CExportLod extends CWriteType {
         }
     }
 
-    Protected Function DownloadAll() {
+    Protected Function DownloadAll($Category) {
         //$FileName = "_Lods.zip";
-        $Link = $this->GetExportPath();
+        $Link = $this->GetExportPath($Category);
         //echo "<a href='$Link'> Download .zip File </a>";
         $this->Msg( "Exported to: <b>$Link</b>", "success" );
     }
 
-    Private Function DownloadFile( $FileName ) {
-        $Link = $this->GetExportPath() . $FileName;
+    Private Function DownloadFile( $FileName, $Category ) {
+        $Link = $this->GetExportPath($Category) . $FileName;
         //echo "<a href='$Link' download='$FileName'> Download File </a>";
         $this->Msg( "Exported to: <b>$Link</b>", "success" );
     }
 
-    Private Function SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName ) {
+    Private Function SaveFile( $Do, $Name, $MyTable, $Table, $Table2, $StructType, $StructTable, $StructType2, $StructTable2, $CountYesOrNo, $CheckSumYesOrNo, $FileName, $Category ) {
         if ( $Do == "all" ) {
-            if ( $this->Create( $this->GetExportPath() . $FileName ) ) {
+            if ( $this->Create( $this->GetExportPath( $Category ) . $FileName ) ) {
                 
             }
         } else {
-            if ( $this->Create( $this->GetExportPath() . $FileName ) ) {
+            if ( $this->Create( $this->GetExportPath( $Category ) . $FileName ) ) {
                 $this->Msg( "File was created!", "success" );
             } else {
                 $this->Msg( "[Error] File can't created", "error" );

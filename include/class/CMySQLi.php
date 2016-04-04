@@ -6,9 +6,14 @@ Class CMyMySQLi {
     PUBLIC $mysqli = null;
     Public $Version = "1.0.35";
 
-    Public Function GetExportPath() {
+    Public Function GetExportPath( $Type ) {
         $ReadConfigFile = parse_ini_file( "config.ini", TRUE );
-        return $ReadConfigFile[ "Main" ][ "ExportPath" ];
+        if ( $Type == "1" )
+            return $ReadConfigFile[ "Main" ][ "ExportPathData" ];
+        elseif($Type == "2")
+            return $ReadConfigFile[ "Main" ][ "ExportPathString" ];
+        else
+            return 0;
     }
 
     Public Function GetDatabaseName() {
@@ -41,11 +46,11 @@ Class CMyMySQLi {
 
 
         $ReadConfigFile = parse_ini_file( "config.ini", TRUE );
-        $DB_SERVER = $ReadConfigFile["MySQL"]["Host"];
-        $DB_USER = $ReadConfigFile["MySQL"]["User"];
-        $DB_PASS = $ReadConfigFile["MySQL"]["Password"];
-        
-        $DB_NAME_EXPORTER = $ReadConfigFile["DataBase"]["ExporterDB"];
+        $DB_SERVER = $ReadConfigFile[ "MySQL" ][ "Host" ];
+        $DB_USER = $ReadConfigFile[ "MySQL" ][ "User" ];
+        $DB_PASS = $ReadConfigFile[ "MySQL" ][ "Password" ];
+
+        $DB_NAME_EXPORTER = $ReadConfigFile[ "DataBase" ][ "ExporterDB" ];
 
         $this->mysqliExporter = new mysqli( $DB_SERVER, $DB_USER, $DB_PASS, $DB_NAME_EXPORTER );
 
