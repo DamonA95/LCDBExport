@@ -190,8 +190,7 @@ class CMain extends CMyMySQLi {
             echo "</form>";
             echo "</table>";
 
-            echo "<a class='exportLink' href='index.php?site=export&do=all'>Export all lod's</a>";
-            echo "<div id='loader'><text>Please wait ...</text><img src='include/img/loader.gif'></div>";
+            echo "<a class='exportLink' href='index.php?site=export&do=all'>Export all lod's</a>";            
             // echo "</ul>";
         
     }

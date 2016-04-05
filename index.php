@@ -33,11 +33,11 @@
         </div>
 
         <div id="maincontainer">
-            <div id="main">               
+            <div id="main">         
                 <?php
                 $CMain->LoadLods( $Do, $SiteID );
                 ?>
-            </div>          
+            </div>              
         </div>
 
         <div id="footer">

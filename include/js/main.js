@@ -15,7 +15,8 @@ $(document).ready(function () {
     });
 
     $("#loginBtn2, .exportLink").click(function () {
-        $("#loader").show();
+        $("#main").html("<div id='loader'><text>Please wait ...</text><img src='include/img/loader.gif'></div>");
+        $("#loader").show();        
     });
 
 });
