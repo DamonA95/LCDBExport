@@ -48,15 +48,15 @@ class CExportLod extends CWriteType {
         }
     }
 
-    Protected Function DownloadAll($Category) {
+    Protected Function DownloadAll( $Category ) {
         //$FileName = "_Lods.zip";
-        $Link = $this->GetExportPath($Category);
+        $Link = $this->GetExportPath( $Category );
         //echo "<a href='$Link'> Download .zip File </a>";
         $this->Msg( "Exported to: <b>$Link</b>", "success" );
     }
 
     Private Function DownloadFile( $FileName, $Category ) {
-        $Link = $this->GetExportPath($Category) . $FileName;
+        $Link = $this->GetExportPath( $Category ) . $FileName;
         //echo "<a href='$Link' download='$FileName'> Download File </a>";
         $this->Msg( "Exported to: <b>$Link</b>", "success" );
     }
@@ -334,16 +334,16 @@ class CExportLod extends CWriteType {
             $this->WriteInt( $endTag );
         }
         if ( $CheckSumYesOrNo == 1 ) {
-            $FileSize = filesize( $this->GetExportPath() . $FileName );
-            $CheckSum = $this->CalculateSum( $FileName, $FileSize );
+            $FileSize = filesize( $this->GetExportPath( $Category ) . $FileName );
+            $CheckSum = $this->CalculateSum( $FileName, $FileSize, $Category );
             $this->WriteInt( $CheckSum );
         }
     }
 
-    Private Function CalculateSum( $FileName, $FileSize ) {
+    Private Function CalculateSum( $FileName, $FileSize, $Category ) {
         $fileSum = 0;
         for ( $i = 0; $i < $FileSize; $i+=20 ) {
-            $binarydata = fopen( $this->GetExportPath() . $FileName, "rb" );
+            $binarydata = fopen( $this->GetExportPath( $Category ) . $FileName, "rb" );
             fseek( $binarydata, $i );
             $contents = fread( $binarydata, 4 );
             $countContents = strlen( $contents );
@@ -351,7 +351,7 @@ class CExportLod extends CWriteType {
                 $array = unpack( "I", $contents );
             } else {
                 echo "<b>CheckSum Error</b><br>";
-            }
+            }            
             $fileSum += $array[ 1 ];
         }
         return $fileSum;
