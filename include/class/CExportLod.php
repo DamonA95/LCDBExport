@@ -351,7 +351,7 @@ class CExportLod extends CWriteType {
                 $array = unpack( "I", $contents );
             } else {
                 echo "<b>CheckSum Error</b><br>";
-            }            
+            }
             $fileSum += $array[ 1 ];
         }
         return $fileSum;

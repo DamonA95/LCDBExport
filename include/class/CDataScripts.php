@@ -109,5 +109,7 @@ class CDataScripts extends CExportLod {
             $this->Msg( "Renamed t_magic names with t_skill.", "success" );
         }
     }
+    
+    
 
 }
